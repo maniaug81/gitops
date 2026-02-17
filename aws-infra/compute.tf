@@ -30,7 +30,7 @@ EOF
 resource "aws_autoscaling_group" "app_asg" {
   desired_capacity = 0
   min_size         = 0
-  max_size         = 4
+  max_size         = 2
 
   vpc_zone_identifier = [
     aws_subnet.app_az1.id,
