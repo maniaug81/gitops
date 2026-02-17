@@ -1,4 +1,4 @@
-resource "aws_secretsmanager_secret" "source_db_secret1" {
+resource "aws_secretsmanager_secret" "source_db_secret" {
   name = "healthcare-source-db-secret2"
 
   tags = {
