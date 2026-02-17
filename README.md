@@ -1,0 +1,2 @@
+# gitops
+Practicing gitops
