@@ -1,13 +1,13 @@
-resource "aws_secretsmanager_secret" "target_db_secret2" {
-  name = "healthcare-source-db-secret1"
+resource "aws_secretsmanager_secret" "source_db_secret1" {
+  name = "healthcare-source-db-secret2"
 
   tags = {
     project = "healthcare"
   }
 }
 
-resource "aws_secretsmanager_secret_version" "target_db_secret2_value" {
-  secret_id = aws_secretsmanager_secret.target_db_secret2.id
+resource "aws_secretsmanager_secret_version" "source_db_secret_value" {
+  secret_id = aws_secretsmanager_secret.source_db_secret.id
 
   secret_string = jsonencode({
     username = "dms_user"
@@ -20,16 +20,16 @@ resource "aws_secretsmanager_secret_version" "target_db_secret2_value" {
 }
 
 
-resource "aws_secretsmanager_secret" "target_db_secret2" {
-  name = "healthcare-target-db-secret1"
+resource "aws_secretsmanager_secret" "target_db_secret" {
+  name = "healthcare-target-db-secret2"
 
   tags = {
     project = "healthcare"
   }
 }
 
-resource "aws_secretsmanager_secret_version" "target_db_secret2_value" {
-  secret_id = aws_secretsmanager_secret.target_db_secret2.id
+resource "aws_secretsmanager_secret_version" "target_db_secret_value" {
+  secret_id = aws_secretsmanager_secret.target_db_secret.id
 
   secret_string = jsonencode({
     username = "admin"
