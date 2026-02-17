@@ -10,9 +10,19 @@ resource "aws_launch_template" "app_lt" {
 
   user_data = base64encode(<<EOF
 #!/bin/bash
-yum install -y httpd
-systemctl start httpd
-echo "Healthcare App Running" > /var/www/html/index.html
+yum update -y
+yum install -y nginx git
+
+systemctl start nginx
+systemctl enable nginx
+
+cd /tmp
+git clone https://github.com/startbootstrap/startbootstrap-creative.git
+
+rm -rf /usr/share/nginx/html/*
+cp -r startbootstrap-creative/* /usr/share/nginx/html/
+
+chown -R nginx:nginx /usr/share/nginx/html
 EOF
   )
 }
