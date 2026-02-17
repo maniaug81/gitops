@@ -19,6 +19,12 @@ resource "aws_subnet" "public_az1" {
   cidr_block              = "10.0.1.0/24"
   availability_zone       = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = true
+  tags = {
+    Name = "public-az1"
+
+    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/prod-eks-cluster" = "shared"
+  }
 }
 
 resource "aws_subnet" "public_az2" {
@@ -26,6 +32,12 @@ resource "aws_subnet" "public_az2" {
   cidr_block              = "10.0.2.0/24"
   availability_zone       = data.aws_availability_zones.available.names[1]
   map_public_ip_on_launch = true
+  tags = {
+    Name = "public-az2"
+
+    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/prod-eks-cluster" = "shared"
+  }  
 }
 
 # --------------------
@@ -36,12 +48,24 @@ resource "aws_subnet" "app_az1" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.11.0/24"
   availability_zone = data.aws_availability_zones.available.names[0]
+  tags = {
+    Name = "app-az1"
+
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/prod-eks-cluster" = "shared"
+  }  
 }
 
 resource "aws_subnet" "app_az2" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.12.0/24"
   availability_zone = data.aws_availability_zones.available.names[1]
+  tags = {
+    Name = "app-az2"
+
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/prod-eks-cluster" = "shared"
+  }  
 }
 
 # --------------------
